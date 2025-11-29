@@ -1,1 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quarterly Earnings — Interactive Report</title>
+
+  <!-- Reveal.js core styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/theme/black.css" id="theme">
+
+  <!-- Highlight (prism) theme will be loaded by the highlight plugin -->
+  <style>
+    /* Small presentation-specific tweaks */
+    .reveal .email { position: absolute; right: 1rem; bottom: 1rem; font-size: 0.85rem; opacity: 0.85; }
+    pre { font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Title slide -->
+      <section>
+        <h1>Quarterly Earnings Report</h1>
+        <h3>Interactive presentation — Technical Consultant</h3>
+        <p class="email">Contact: 22ds2000067@ds.study.iitm.ac.in</p>
+        <aside class="notes">
+          Introduce yourself briefly and set expectations: 10–15 minutes walkthrough, Q&A afterwards.
+        </aside>
+      </section>
+
+      <!-- Markdown slide (require markdown plugin) -->
+      <section data-markdown>
+        <script type="text/template">
+## Executive Summary (Markdown)
+
+- **Revenue:** +8% QoQ
+- **Operating Margin:** 14.2% (improved from 12.7%)
+- **Key drivers:** Increased fee-based income, cost optimisation
+
+> Note: This slide is authored in **Markdown** — easy for stakeholders to edit in the repo.
+        </script>
+        <aside class="notes">
+          Call out the major wins with one sentence per bullet. Keep examples short.
+        </aside>
+      </section>
+
+      <!-- Fragment animation example -->
+      <section>
+        <h2>Highlights</h2>
+        <ul>
+          <li class="fragment">Revenue growth driven by Retail Banking</li>
+          <li class="fragment">Treasury performance held steady</li>
+          <li class="fragment">Digital adoption increased by 22%</li>
+        </ul>
+        <aside class="notes">
+          Use fragments during talk to reveal each point and emphasize cause-effect.
+        </aside>
+      </section>
+
+      <!-- Code sample with syntax highlighting -->
+      <section>
+        <h2>Sample ETL: Data pull (Python)</h2>
+        <pre><code class="language-python">import pandas as pd
+
+# fetch latest ledger snapshot
+df = pd.read_csv('data/ledger_snapshot.csv')
+# simple aggregation
+agg = df.groupby('product').agg({'amount': 'sum', 'txn_id': 'count'})
+print(agg.sort_values('amount', ascending=False).head())
+        </code></pre>
+        <aside class="notes">
+          Explain that this snippet is a simplified extract of how the P&L numbers are prepared. Mention validation checks.
+        </aside>
+      </section>
+
+      <!-- Mathematical equation (financial formula) -->
+      <section>
+        <h2>Key Financial Formula</h2>
+        <p>Return on Invested Capital (ROIC):</p>
+        <p class="fragment">\[\mathrm{ROIC} = \frac{\mathrm{NOPAT}}{\mathrm{Invested\ Capital}} = \frac{\mathrm{EBIT} \times (1 - t)}{\mathrm{Equity} + \mathrm{Debt} - \mathrm{Cash}}\]</p>
+        <p class="fragment">Example: If NOPAT = 120M and Invested Capital = 800M, ROIC = 15%. \(\,\) </p>
+        <aside class="notes">
+          Walk through each term (NOPAT, tax rate t, invested capital) and why investors care about ROIC vs ROE.
+        </aside>
+      </section>
+
+      <!-- Slide with interactive fragments and code block fragment -->
+      <section>
+        <h2>Quarter-over-Quarter Drivers</h2>
+        <ol>
+          <li class="fragment">Net Interest Income (NII) improvement</li>
+          <li class="fragment">Non-interest income — fees & commissions</li>
+          <li class="fragment">Cost control measures (efficiency ratio)</li>
+        </ol>
+
+        <p class="fragment">Efficiency Ratio formula: \(\mathrm{Efficiency} = \frac{Operating\ Expenses}{Net\ Revenue} \times 100\%\)</p>
+
+        <pre class="fragment"><code class="language-sql">-- sample query used to compute NII
+SELECT date_trunc('quarter', txn_date) AS qtr,
+       SUM(interest_income) - SUM(interest_expense) AS nii
+FROM ledger
+GROUP BY 1
+ORDER BY 1 DESC;
+        </code></pre>
+
+        <aside class="notes">
+          Show one fragment at a time; when the SQL appears, mention where the data lives and governance checks.
+        </aside>
+      </section>
+
+      <!-- Closing slide with deployment hint -->
+      <section>
+        <h2>Next steps & Deployment</h2>
+        <ul>
+          <li class="fragment">Review numbers with Finance (controller sign-off)</li>
+          <li class="fragment">Publish final slides to GitHub Pages for stakeholder access</li>
+        </ul>
+        <p class="fragment">Contact: <strong>22ds2000067@ds.study.iitm.ac.in</strong></p>
+        <aside class="notes">
+          Provide stakeholders with the GitHub Pages URL and note read-only vs editable locations.
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js + plugins (ES module build) -->
+  <script type="module">
+    import Reveal from 'https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.esm.js';
+    import Markdown from 'https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/markdown/markdown.esm.js';
+    import Highlight from 'https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/highlight/highlight.esm.js';
+    import Notes from 'https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/notes/notes.esm.js';
+    import Math from 'https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/math/math.esm.js';
+
+    Reveal.initialize({
+      hash: true,
+      plugins: [ Markdown, Highlight, Notes, Math ],
+      math: {
+        // MathJax configuration — the plugin will load MathJax for you
+        mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+      },
+      transition: 'fade'
+    });
+  </script>
+
+</body>
+</html>
 
